@@ -1,16 +1,12 @@
 {
-  "name": "montmeloinside",
-  "version": "1.0.0",
-  "main": "server.js",
+  "name": "backend",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js"
   },
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
-    "express": "^5.2.1",
-    "mongoose": "^9.4.1",
-    "nodemon": "^3.1.14"
+    "express": "^4.19.2",
+    "cors": "^2.8.5"
   }
 }
