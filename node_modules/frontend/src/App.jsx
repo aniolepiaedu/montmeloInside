@@ -1,4 +1,5 @@
 import "./App.css";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   return (
@@ -22,18 +23,18 @@ export default function Login() {
 
         <div className="buttons">
 
-          <button className="btn primary">
+          <Link to="/como-llegar" className="btn primary">
             <img
               src="/images/iconLogin.png"
               alt="icon"
               className="btn-icon"
             />
             Com arribar-hi
-          </button>
+          </Link>
 
-          <button className="btn secondary">
+          <Link to="/login" className="btn secondary">
             Iniciar sessió
-          </button>
+          </Link>
 
         </div>
       </main>
