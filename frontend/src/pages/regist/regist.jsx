@@ -36,7 +36,8 @@ const handleSubmit = async (e) => {
   }
 
   console.log("OK:", data);
-  alert("Usuari creat!");
+  alert("Usuari creat! Ja pots iniciar sessió");
+  location.href = "/login";
 };
 
   return (
