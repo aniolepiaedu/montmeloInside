@@ -4,6 +4,34 @@ import "./login.css";
 export default function Login() {
   const [showPwd, setShowPwd] = useState(false);
 
+  const [form, setForm] = useState({
+  email: "",
+  password: "",
+  remember: false
+});
+
+const handleLogin = async () => {
+  try {
+    const res = await fetch("http://localhost:3001/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.message);
+      return;
+    }
+    if (data.token) {
+      localStorage.setItem("token", data.token);
+    }
+    window.location.href = "/home";
+
+  } catch (err) {
+    alert("Error de connexió amb el servidor");
+  }
+};
   return (
     <div className="lp-page">
       <div className="lp-card">
@@ -18,18 +46,27 @@ export default function Login() {
         <label className="lp-label">Correu electrònic</label>
         <div className="lp-input-wrap">
           <span className="lp-input-icon">✉</span>
-          <input type="email" placeholder="exemple@circuit.cat" />
-        </div>
+         <input
+          type="email"
+          placeholder="email"
+          value={form.email}
+          onChange={(e) =>
+            setForm({ ...form, email: e.target.value })
+          }
+        />        </div>
 
         <label className="lp-label">Contrasenya</label>
         <div className="lp-input-wrap">
           <span className="lp-input-icon">🔒</span>
 
-          <input
-            type={showPwd ? "text" : "password"}
-            placeholder="••••••••"
-            id="pwd"
-          />
+         <input
+          type={showPwd ? "text" : "password"}
+          placeholder="password"
+          value={form.password}
+          onChange={(e) =>
+            setForm({ ...form, password: e.target.value })
+          }
+        />
 
           <button
             type="button"
@@ -42,7 +79,10 @@ export default function Login() {
 
         <div className="lp-options">
           <label className="lp-remember">
-            <input type="checkbox" /> Recordar sessió
+            <input type="checkbox"
+                onChange={(e) =>
+                    setForm({ ...form, remember: e.target.checked })
+                } /> Recordar sessió
           </label>
 
           <a href="#" className="lp-forgot">
@@ -50,7 +90,7 @@ export default function Login() {
           </a>
         </div>
 
-        <button className="lp-submit">
+        <button onClick={handleLogin} className="lp-submit">
         Entrar
         <img
             src="/images/icon-login-regist-button.png"

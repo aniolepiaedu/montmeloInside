@@ -2,13 +2,10 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import Usuari from "../models/Usuaris.js";
 
-// REGISTRE
 export const registre = async (req, res) => {
   try {
-    console.log("BODY REBUT:", req.body);
     const { name, email, password, confirmPassword } = req.body;
 
-    // validació bàsica
     if (!name || !email || !password || !confirmPassword) {
       return res.status(400).json({ message: "Falten camps" });
     }
@@ -24,50 +21,60 @@ export const registre = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = new Usuari({
+    const user = await Usuari.create({
       nom_complet: name,
       correu: email,
       contrasenya: hashedPassword,
+      token: "",
+      notificacions: {},
+      historial_navegacio: [],
+      ubicacioUsuari: null,
+      esdeveniment: null,
     });
 
-    await user.save();
-
-    res.status(201).json({
-      message: "Usuari creat correctament",
-      userId: user._id,
+    return res.status(201).json({
+      message: "Usuari creat",
+      user,
     });
+
   } catch (error) {
-    res.status(500).json({ message: "Error servidor", error });
+    return res.status(500).json({ message: "Error servidor" });
   }
 };
 
-// LOGIN
+
 export const login = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, remember } = req.body;
 
     const user = await Usuari.findOne({ correu: email });
+
     if (!user) {
       return res.status(400).json({ message: "Usuari no existeix" });
     }
 
-    const valid = await bcrypt.compare(password, user.contrasenya);
-    if (!valid) {
+    const ok = await bcrypt.compare(password, user.contrasenya);
+
+    if (!ok) {
       return res.status(400).json({ message: "Contrasenya incorrecta" });
     }
+    let token = "";
 
-    const token = jwt.sign(
-      { id: user._id },
-      "SECRET_KEY",
-      { expiresIn: "7d" }
-    );
+    if (remember) {
+      token = jwt.sign(
+        { id: user._id },
+        "SECRET_KEY",
+        { expiresIn: "7d" }
+      );
+    }
 
     res.json({
       message: "Login correcte",
       token,
       user,
     });
+
   } catch (error) {
-    res.status(500).json({ message: "Error servidor", error });
+    res.status(500).json({ message: "Error servidor" });
   }
 };
