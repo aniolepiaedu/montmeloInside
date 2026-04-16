@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-
+import usuarisRuta from "../routes/Usuaris.js"
 const app = express();
 
 app.use(cors());
@@ -15,6 +15,15 @@ mongoose.connect("mongodb://localhost:27017/montmeloInside")
   .catch((err) => {
     console.error("Error MongoDB", err);
   });
+
+app.use("/api", usuarisRuta);
+
+app.post("/api/register", (req, res) => {
+  console.log("HIT REGISTER");
+  res.send("ok");
+});
+
+
 
 // TEST ROUTE
 app.get("/api/hello", (req, res) => {
