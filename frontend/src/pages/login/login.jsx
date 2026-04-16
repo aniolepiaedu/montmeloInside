@@ -8,7 +8,7 @@ export default function Login() {
     <div className="lp-page">
       <div className="lp-card">
 
-        <button className="lp-back">←</button>
+        <img src="/images/arrow-left.png" className="lp-back"></img>
 
         <h1 className="lp-title">Iniciar sessió</h1>
         <p className="lp-subtitle">
@@ -50,8 +50,14 @@ export default function Login() {
           </a>
         </div>
 
-        <button className="lp-submit">Entrar →</button>
-
+        <button className="lp-submit">
+        Entrar
+        <img
+            src="/images/icon-login-regist-button.png"
+            alt="icon"
+            className="lp-submit-icon"
+        />
+        </button>
         <div className="lp-divider">
           <div className="lp-divider-line" />
           <span className="lp-divider-text">O CONTINUA AMB</span>

@@ -57,7 +57,7 @@ export default function Regist() {
 
         {/* Register */}
         <p className="register">
-          No tens compte? <a href="#">Registrar-se</a>
+          No tens compte? <a href="/regist">Registrar-se</a>
         </p>
 
       </main>
