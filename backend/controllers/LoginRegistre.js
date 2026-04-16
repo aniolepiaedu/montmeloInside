@@ -2,79 +2,57 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import Usuari from "../models/Usuaris.js";
 
+// 🔹 REGISTRO
 export const registre = async (req, res) => {
-  try {
-    const { name, email, password, confirmPassword } = req.body;
+  const { name, email, password, confirmPassword } = req.body;
 
-    if (!name || !email || !password || !confirmPassword) {
-      return res.status(400).json({ message: "Falten camps" });
-    }
-
-    if (password !== confirmPassword) {
-      return res.status(400).json({ message: "Les contrasenyes no coincideixen" });
-    }
-
-    const exists = await Usuari.findOne({ correu: email });
-    if (exists) {
-      return res.status(400).json({ message: "Usuari ja existeix" });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const user = await Usuari.create({
-      nom_complet: name,
-      correu: email,
-      contrasenya: hashedPassword,
-      token: "",
-      notificacions: {},
-      historial_navegacio: [],
-      ubicacioUsuari: null,
-      esdeveniment: null,
-    });
-
-    return res.status(201).json({
-      message: "Usuari creat",
-      user,
-    });
-
-  } catch (error) {
-    return res.status(500).json({ message: "Error servidor" });
+  if (!name || !email || !password || !confirmPassword) {
+    return res.json({ message: "Falten camps" });
   }
+
+  if (password !== confirmPassword) {
+    return res.json({ message: "No coincideixen" });
+  }
+
+  const userExists = await Usuari.findOne({ correu: email });
+  if (userExists) {
+    return res.json({ message: "Ja existeix" });
+  }
+
+  const hash = await bcrypt.hash(password, 10);
+
+  const user = await Usuari.create({
+    nom_complet: name,
+    correu: email,
+    contrasenya: hash,
+  });
+
+  res.json({ message: "Creat", user });
 };
 
-
+// 🔹 LOGIN
 export const login = async (req, res) => {
-  try {
-    const { email, password, remember } = req.body;
+  const { email, password, remember } = req.body;
 
-    const user = await Usuari.findOne({ correu: email });
-
-    if (!user) {
-      return res.status(400).json({ message: "Usuari no existeix" });
-    }
-
-    const ok = await bcrypt.compare(password, user.contrasenya);
-
-    if (!ok) {
-      return res.status(400).json({ message: "Contrasenya incorrecta" });
-    }
-    let token = "";
-
-    if (remember) {
-      token = jwt.sign(
-        { id: user._id },
-        "SECRET_KEY",
-        { expiresIn: "7d" }
-      );
-    }
-
-    res.json({
-      message: "Login correcte",
-      token,
-      user,
-    });
-
-  } catch (error) {
-    res.status(500).json({ message: "Error servidor" });
+  const user = await Usuari.findOne({ correu: email });
+  if (!user) {
+    return res.json({ message: "No existeix" });
   }
+
+  const valid = await bcrypt.compare(password, user.contrasenya);
+  if (!valid) {
+    return res.json({ message: "Mal password" });
+  }
+
+  let token = "";
+
+  if (remember) {
+    token = jwt.sign({ id: user._id }, "SECRET_KEY");
+
+    // guardar token
+    user.token = token;
+    await user.save();
+  }
+
+  res.json({ message: "OK", token });
 };
