@@ -2,65 +2,67 @@ import "./regist.css";
 
 export default function Regist() {
   return (
-    <div className="login-page">
+    <div className="lp-page">
+      <div className="lp-card">
 
-      {/* Header */}
-      <header className="login-header">
-        <button className="back-btn">←</button>
-        <h1 className="title">Iniciar sessió</h1>
-        <p className="subtitle">
-          Accedeix per guardar la teva grada i preferències
+        {/* Back */}
+        <img src="/images/arrow-left.png" className="lp-back" alt="back" />
+
+        {/* Header */}
+        <h1 className="lp-title">Crear compte</h1>
+        <p className="lp-subtitle">
+          Personalitza la teva experiència al circuit
         </p>
-      </header>
 
-      {/* Form */}
-      <main className="login-content">
+        {/* Nom */}
+        <label className="lp-label">Nom complet</label>
+        <div className="lp-input-wrap">
+          <span className="lp-input-icon">👤</span>
+          <input type="text" placeholder="Introdueix el teu nom" />
+        </div>
 
-        <label className="label">Correu electrònic</label>
-        <div className="input-box">
+        {/* Email */}
+        <label className="lp-label">Correu electrònic</label>
+        <div className="lp-input-wrap">
+          <span className="lp-input-icon">✉</span>
           <input type="email" placeholder="exemple@circuit.cat" />
         </div>
 
-        <label className="label">Contrasenya</label>
-        <div className="input-box password-box">
+        {/* Password */}
+        <label className="lp-label">Contrasenya</label>
+        <div className="lp-input-wrap">
+          <span className="lp-input-icon">🔒</span>
           <input type="password" placeholder="••••••••" />
-          <span className="eye">👁</span>
+          <button type="button" className="lp-eye">👁</button>
         </div>
 
-        {/* Options */}
-        <div className="options">
-          <label className="remember">
-            <input type="checkbox" />
-            Recordar sessió
-          </label>
+        {/* Confirm password */}
+        <label className="lp-label">Confirmar contrasenya</label>
+        <div className="lp-input-wrap">
+          <span className="lp-input-icon">🔒</span>
+          <input type="password" placeholder="••••••••" />
+          <button type="button" className="lp-eye">👁</button>
+        </div>
 
-          <a href="#" className="forgot">
-            Has oblidat la contrasenya?
-          </a>
+        {/* Terms */}
+        <div className="lp-options">
+          <label className="lp-remember">
+            <input type="checkbox" />
+            Accepto els termes i condicions i la política de privacitat del circuit.
+          </label>
         </div>
 
         {/* Button */}
-        <button className="login-btn">Entrar →</button>
+        <button className="lp-submit">
+          Crear compte
+        </button>
 
-        {/* Divider */}
-        <div className="divider">
-          <span></span>
-          <p>O CONTINUA AMB</p>
-          <span></span>
-        </div>
-
-        {/* Social */}
-        <div className="social">
-          <button className="google">G</button>
-          <button className="ios">iOS</button>
-        </div>
-
-        {/* Register */}
-        <p className="register">
-          No tens compte? <a href="/regist">Registrar-se</a>
+        {/* Login link */}
+        <p className="lp-register">
+          Ja tens compte? <a href="/login">Iniciar sessió</a>
         </p>
 
-      </main>
+      </div>
     </div>
   );
 }

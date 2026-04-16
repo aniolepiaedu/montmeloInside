@@ -96,7 +96,7 @@ export default function Login() {
         </div>
 
         <p className="lp-register">
-          No tens compte? <a href="#">Registrar-se</a>
+          No tens compte? <a href="/regist">Registrar-se</a>
         </p>
 
       </div>
