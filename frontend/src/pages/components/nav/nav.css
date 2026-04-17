@@ -1,0 +1,72 @@
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #eee;
+  padding: 6px 0;
+}
+
+/* BOTÓN */
+.nav-item {
+  border: none;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #7d8799;
+  cursor: pointer;
+  flex: 1;
+}
+
+/* 🔥 CONTENEDOR FIJO PARA ICONOS */
+.nav-item img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+}
+
+/* opcional: fuerza alineación perfecta */
+.nav-item span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+/* TEXTO */
+.nav-item small {
+  font-size: 12px;
+  text-align: center;
+}
+
+/* ACTIVO */
+.nav-item.active {
+  color: #ff1200;
+}
+
+/* toque móvil */
+.nav-item:active {
+  transform: scale(0.95);
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .bottom-nav {
+    height: 90px;
+  }
+
+  .nav-item img {
+    width: 36px;
+    height: 36px;
+  }
+}

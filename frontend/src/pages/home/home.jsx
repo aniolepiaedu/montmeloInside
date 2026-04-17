@@ -6,7 +6,7 @@ import {
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "./home.css";
-
+import Navbar from "../components/nav/nav.jsx";
 
 const PUNTS = [
   {
@@ -327,8 +327,11 @@ export default function MapaCircuit() {
         Com arribar
       </button>
     </div>
+    <Navbar/>
   </div>
+  
 )}
+
 
       </div>
     </div>
