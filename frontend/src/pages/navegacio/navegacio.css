@@ -1,0 +1,125 @@
+/* FONDO WEB */
+.app-bg {
+  background: #e5e5e5;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* "TELÉFONO" */
+.mobile-screen {
+  width: 375px;
+  height: 812px;
+  background: #f5f5f5;
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* HEADER */
+.top-bar {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  font-weight: 600;
+}
+
+.back {
+  border: none;
+  background: none;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+/* MAPA */
+.map-card {
+  margin: 0 16px;
+  background: #eaeaea;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+.map-card img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+/* CONTENIDO */
+.content {
+  padding: 20px 16px;
+}
+
+.content h1 {
+  margin: 0;
+  font-size: 22px;
+}
+
+.sub {
+  color: #888;
+  margin: 6px 0 12px;
+}
+
+.meta {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* BOTONES */
+.actions {
+  margin-top: auto;
+  padding: 16px;
+}
+
+.primary {
+  width: 100%;
+  background: #e10600;
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 30px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.secondary {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 30px;
+}
+
+/* NAVBAR */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px;
+  background: white;
+  border-top: 1px solid #ddd;
+}
+
+.bottom-nav div {
+  font-size: 12px;
+  color: #999;
+}
+
+.bottom-nav .active {
+  color: #e10600;
+}
+
+@media (max-width: 480px) {
+  .mobile-screen {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+
+  .app-bg {
+    align-items: flex-start;
+  }
+}
