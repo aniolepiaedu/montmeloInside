@@ -11,7 +11,6 @@ import Perfil from "./pages/perfil/perfil.jsx";
 import Navegacio from "./pages/navegacio/navegacio.jsx";
 import Serveis from "./pages/serveis/serveis.jsx";
 
-
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
