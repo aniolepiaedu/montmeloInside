@@ -44,7 +44,9 @@ const handleSubmit = async (e) => {
     <div className="lp-page">
       <div className="lp-card">
 
-        <img src="/images/arrow-left.png" className="lp-back" alt="back" />
+        <a href="/">
+        <img src="/images/arrow-left.png" className="lp-back" />
+      </a>
 
         <h1 className="lp-title">Crear compte</h1>
         <p className="lp-subtitle">

@@ -36,8 +36,9 @@ const handleLogin = async () => {
     <div className="lp-page">
       <div className="lp-card">
 
-        <img src="/images/arrow-left.png" className="lp-back"></img>
-
+      <a href="/">
+        <img src="/images/arrow-left.png" className="lp-back" />
+      </a>
         <h1 className="lp-title">Iniciar sessió</h1>
         <p className="lp-subtitle">
           Accedeix per guardar la teva grada i preferències
